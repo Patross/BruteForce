@@ -19,20 +19,32 @@ namespace BruteForce
         {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-            'u', 'v', 'w', 'x', 'y', 'z','A','B','C','D','E'
+            'u', 'v', 'w', 'x', 'y', 'z','A','B','C','D','E',
+            'F','G','H','I','J','K','L','M','N','O','Q','R',
+            'S','T','U','V','W','X','Y','Z','1','2','3','4',
+            '5','6','7','8','9','0'
         };
 
         static void Main(string[] args)
         {
-            StartBruteForce(4);
+            string guess = "";
+            string password = "az";
+            int guessLength = 1;
+
+            while (guess != password)
+            {
+                guess = StartBruteForce(guessLength);
+                guessLength++;
+            }
         }
 
         /// <summary>
         /// Start Brute Force.
         /// </summary>
         /// <param name="length">Words length.</param>
-        public static void StartBruteForce(int length)
+        public static string StartBruteForce(int length)
         {
+            string result;
             StringBuilder sb = new StringBuilder(length);
             char currentChar = fCharList[0];
 
@@ -41,10 +53,11 @@ namespace BruteForce
                 sb.Append(currentChar);
             }
 
-            ChangeCharacters(0, sb, length);
+            result = ChangeCharacters(0, sb, length);
+            return result;
         }
 
-        private static StringBuilder ChangeCharacters(int pos, StringBuilder sb, int length)
+        private static string ChangeCharacters(int pos, StringBuilder sb, int length)
         {
             for (int i = 0; i <= fCharList.Length - 1; i++)
             {
@@ -61,10 +74,9 @@ namespace BruteForce
                 {
                     ChangeCharacters(pos + 1, sb, length);
                 }
-                Thread.Sleep(150);
             }
 
-            return sb;
+            return sb.ToString();
         }
 
     }
